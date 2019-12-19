@@ -1,6 +1,6 @@
 # One_install_Samba
 ## 记一次 Linux 安装samba软件
-> ## 实现Centos6.7一键安装samba，并实现相关功能
+> ## 实现Centos6.7一键安装samba，并实现相关功能，以下为相关操作
 - ## 1、安装samba软件：yum install samba;
 - ## 2、查询是否安装samba：rpm -q samba
 - ## 3、关闭windows防火墙，Linux防火墙
@@ -16,27 +16,52 @@
 - ## 7、登录：windows中输入LinuxIP地址登录，登录时输入samba用户名和密码
    - ### \\Linux IP地址
 - ## 8、阅读并修改 /etc/samba/smb.conf文档实现7、8功能
-
+---
+# 配置说明
+ ![配置说明](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdmF0YXIuY3Nkbi5uZXQvNy83L0IvMV9yYWxmX2h4MTYzY29tLmpwZw)
+---
+# 一键安装的使用及原理
+## 1.使用
+   - ### 在命令提示框中，以root用户运行One_Install_Samba.sh文件
+   ```
+   ./One_Install_Samba.sh
+   ```
+## 2.原理
 ```
 #step1
-#关闭防火墙
-#设置IP地址
-
-service iptables stop
-ifconfig eth0 192.168.5.40 netmask 255.255.255.0
+#先安装，避免网络无法下载
+if [ `whoami` != "root" ];then
+        echo "请切换roo用户，su 密码super0！！！"
+        exit
+fi
 
 #step2
-#软件安装
+rpm -q samba
+rpm -e samba
+echo "5秒后开始安装"
+sleep 5
 yum -y install samba
+echo "samba安装成功"
 
 #step3
-#添加用户
-mbpasswd -a danyanpi
+#关闭防火墙
+#设置ip为同一个网段
+service iptables stop
+read -p "查看VMnet8，输入ip地址:" address
+read -p "请输入配置网卡:" eth
+ifconfig ${eth} ${address}
+echo "网络配置成功"
 
 #step4
-#修改配置
-
-
-
+#添加用户
+read -p "请输入用户名" username
+useradd ${username}
+smbpasswd -a ${username}
+echo "samba添加用户成功"
+service smb start
+setenforce 0
+service smb restart
+echo "samba重启成功"
+echo "安装完毕，在win7输入\\$address"
 
 ```
