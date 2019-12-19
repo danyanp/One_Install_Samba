@@ -18,14 +18,16 @@
 - ## 8、阅读并修改 /etc/samba/smb.conf文档实现7、8功能
 ---
 # 配置说明
- ![配置说明](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdmF0YXIuY3Nkbi5uZXQvNy83L0IvMV9yYWxmX2h4MTYzY29tLmpwZw)
+ ![配置说明](https://github.com/danyanp/One_Install_Samba/blob/master/Samba_Explain.png?raw=true)
 ---
 # 一键安装的使用及原理
-## 1.使用
+## 1. [开源地址](https://github.com/danyanp/One_Install_Samba)
+## 2. 使用
    - ### 在命令提示框中，以root用户运行One_Install_Samba.sh文件
    ```
    ./One_Install_Samba.sh
    ```
+![一键安装](https://github.com/danyanp/One_Install_Samba/blob/master/root.png?raw=true)
 ## 2.原理
 ```
 #step1
