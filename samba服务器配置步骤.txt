@@ -1,0 +1,16 @@
+1、安装samba软件：yum install samba;
+查询是否安装：rpm -q samba
+2、关闭windows防火墙，Linux防火墙
+setup：允许与samba相关
+3、设置Linux网络IP地址与windows中VMnet8的ＩＰ地址前三位相同
+ｗｉｎｄｏｗｓ中查看IP地址的配置命令：ipconfig
+Linux 中查看IP地址的配置命令：ifconfig
+ifconfig 设置IP地址的格式：ifconfig 网卡名称 IP地址
+4、添加Linux用户
+  添加samba用户（samba用户首先应该是Linux用户）
+	smbpasswd -a Linux用户名
+5、启动samba服务：service smb start 
+                 service smb restart(改变了samba相关设置)
+6、登录：windows中输入LinuxIP地址登录，登录时输入samba用户名和密码
+\\Linux IP地址
+7、阅读并修改 /etc/samba/smb.conf文档实现7、8功能
