@@ -11,6 +11,12 @@ sleep 5
 yum -y install samba
 echo "samba安装成功"
 
+#配置
+mkdir /etc/public
+chmod 777 /etc/public
+
+wget -O /etc/samba/smb.conf https://www.schoowall.com/smb_mod.conf
+
 #关闭防火墙
 #设置ip为同一个网段
 service iptables stop
@@ -32,8 +38,5 @@ echo "安装完毕，在win7输入\\ $address"
 
 read -p "是否进行创建public共享目录，输入y" address
 
-mkdir /etc/public
-chmod 777 /etc/public
 
-wget -O /etc/samba/smb.conf https://www.schoowall.com/smb_mod.conf
 
